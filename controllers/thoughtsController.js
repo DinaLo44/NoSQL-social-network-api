@@ -1,12 +1,13 @@
 const { Thought, User } = require('../models');
 
 module.exports = {
+//Gets all thoughts
     getAllThoughts(req, res) {
         Thought.find()
             .then((thoughts) => res.json(thoughts))
             .catch((err) => res.status(500).json(err));
     },
-
+//gets only one thought based on the thoughtId 
     getOneThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .then((thought) =>
@@ -16,7 +17,7 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // create a new thought
+// creates a new thought
     createNewThought(req, res) {
         Thought.create(req.body)
             .then(({ _id }) => {
@@ -37,7 +38,7 @@ module.exports = {
             });
     },
 
-
+//updates an existing thought based on the thoughtId
     updateThought(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
@@ -52,7 +53,7 @@ module.exports = {
                 res.status(500).json(err);
             })
     },
-
+//deletes a thought based on ith thoughtId
     deleteThought(req, res) {
         Thought.findOneAndDelete(
             { _id: req.params.thoughtId },
@@ -74,10 +75,11 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+//creates a new reaction based on the thoughtId
     createReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $addToSet: {reactions: req.body }},
+            { $addToSet: { reactions: req.body } },
             { runValidators: true, new: true }
         )
             .then((thought) =>
@@ -88,6 +90,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+//deletes a reaction based on the thoughtId and reactionId
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
