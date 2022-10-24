@@ -12,7 +12,7 @@ const usersSchema = new Schema({
         required: true,
         unique: true,
         /*The source to obtain this regex was the README file with the instructions for challenge 17 */
-        match: [`/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/`]
+        match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
     },
     thoughts: [
         {
@@ -26,12 +26,17 @@ const usersSchema = new Schema({
             ref: 'User'
         }
     ],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 },
     {
         toJSON: {
             virtuals: true,
         },
         id: false,
+        timestamps: true,
     }
 );
 
