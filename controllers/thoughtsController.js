@@ -24,7 +24,8 @@ module.exports = {
                 return User.findOneAndUpdate(
                     {},
                     { $push: { thoughts: _id } },
-                    { new: true }
+                    //timestamps: false, eliminates the updatedAt field
+                    { new: true, timestamps: false}
                 )
             })
             .then((user) => {
@@ -43,7 +44,8 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { thoughtText: req.body.thoughtText },
-            { runValidators: true, new: true }
+            //timestamps: false, eliminates the updatedAt field
+            { runValidators: true, new: true, timestamps: false }
         ).then((thought) =>
             !thought
                 ? res.status(404).json({ message: 'Sorry, NO thought was found with this ID' })
@@ -65,7 +67,8 @@ module.exports = {
                     : User.findOneAndUpdate(
                         { thoughts: req.params.thoughtId },
                         { $pull: { thoughts: req.params.thoughtId } },
-                        { new: true },
+                        //timestamps: false, eliminates the updatedAt field
+                        { new: true, timestamps: false },
                     )
             )
             .then((user) =>
@@ -80,7 +83,8 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $addToSet: { reactions: req.body } },
-            { runValidators: true, new: true }
+            //timestamps: false, eliminates the updatedAt field
+            { runValidators: true, new: true, timestamps: false }
         )
             .then((thought) =>
                 !thought
@@ -95,7 +99,8 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactionId: req.params.reactionId } } },
-            { runValidators: true, new: true }
+            //timestamps: false, eliminates the updatedAt field
+            { runValidators: true, new: true, timestamps: false }
         )
             .then((thought) =>
                 !thought

@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
-
+const moment = require('moment');
 const usersSchema = new Schema({
     //the user name must be a string, unique, trimmed and is a required field
     username: {
@@ -34,14 +34,18 @@ const usersSchema = new Schema({
         //specifies the currrent date
         type: Date,
         default: Date.now,
+        get: () => {
+            return moment().format("MMM Do, YYYY, hh:mm:ss a");
+        },
     },
 },
     {
         toJSON: {
+            getters: true,
             virtuals: true,
         },
         id: false,
-        timestamps: true,
+        
     }
 );
 

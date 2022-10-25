@@ -31,7 +31,8 @@ module.exports = {
         User.findOneAndUpdate(
             {_id: req.params.userId },
             { $set: req.body } ,
-            { runValidators: true, new: true }
+            //timestamps: false, eliminates the updatedAt field
+            { runValidators: true, new: true, timestamps: false }
         ).then((user) =>
         !user
         ? res.status(404).json({message: 'Sorry, NO user found with this ID'})
@@ -54,7 +55,8 @@ module.exports = {
         User.findOneAndUpdate(
           { _id: req.params.userId },
           {$addToSet: {friends: req.body}},
-          { runValidators: true, new: true }
+          //timestamps: false, eliminates the updatedAt field
+          { runValidators: true, new: true, timestamps: false }
         )
           .then((user) =>
             !user
@@ -68,7 +70,8 @@ module.exports = {
         User.findOneAndUpdate(
           { _id: req.params.userId },
           { $pull: {friends: req.params.friendId}},
-          { runValidators: true, new: true }
+          //timestamps: false, eliminates the updatedAt field
+          { runValidators: true, new: true, timestamps: false }
         )
           .then((user) =>
             !user
