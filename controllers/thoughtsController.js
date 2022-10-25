@@ -53,7 +53,7 @@ module.exports = {
                 res.status(500).json(err);
             })
     },
-//deletes a thought based on ith thoughtId
+//deletes a thought based on its thoughtId
     deleteThought(req, res) {
         Thought.findOneAndDelete(
             { _id: req.params.thoughtId },
