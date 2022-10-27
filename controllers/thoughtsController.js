@@ -18,11 +18,11 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 // creates a new thought
-    createNewThought(req, res) {
-        Thought.create(req.body)
+    createNewThought({body}, res) {
+        Thought.create(body)
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
-                    {},
+                    {_id: body.userId},
                     { $push: { thoughts: _id } },
                     //timestamps: false, eliminates the updatedAt field
                     { new: true, timestamps: false}
