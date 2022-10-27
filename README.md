@@ -11,7 +11,7 @@ The technologies I used in this project are MongoDB, as the NoSQL database, and 
 
 # Demo video link
 In order to see the whole application's functionality, please click on the following link:
-
+https://drive.google.com/file/d/1arWW3-ZOBcAlHtNEXgT8Vg7JOm05I27R/view
 
 # GitHub repository link
 https://github.com/DinaLo44/NoSQL-social-network-api
