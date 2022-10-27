@@ -31,7 +31,7 @@ const usersSchema = new Schema({
         }
     ],
     createdAt: {
-        //specifies the currrent date
+        //specifies the currrent date and time when it was created
         type: Date,
         default: Date.now,
         get: () => {
